@@ -10,4 +10,5 @@ class Post(AbstractModelMixin, models.Model):
     owner = models.ForeignKey(User, related_name="posts", on_delete=models.CASCADE)
 
     class Meta:
+        db_table = "post"
         ordering = ["created_at"]
