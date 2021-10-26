@@ -8,26 +8,61 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='User',
+            name="User",
             fields=[
-                ('password', models.CharField(max_length=128, verbose_name='password')),
-                ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created at')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='Updated at')),
-                ('deleted_at', models.DateTimeField(auto_now=True, verbose_name='Deleted at')),
-                ('name', models.CharField(max_length=255, verbose_name='User full name')),
-                ('email', models.EmailField(max_length=254, unique=True, verbose_name='Email address')),
-                ('is_staff', models.BooleanField(default=False, verbose_name='Is Staff')),
-                ('is_active', models.BooleanField(default=True, verbose_name='Is Active')),
+                ("password", models.CharField(max_length=128, verbose_name="password")),
+                (
+                    "last_login",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="last login"
+                    ),
+                ),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Created at"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Updated at"),
+                ),
+                (
+                    "deleted_at",
+                    models.DateTimeField(auto_now=True, verbose_name="Deleted at"),
+                ),
+                (
+                    "name",
+                    models.CharField(max_length=255, verbose_name="User full name"),
+                ),
+                (
+                    "email",
+                    models.EmailField(
+                        max_length=254, unique=True, verbose_name="Email address"
+                    ),
+                ),
+                (
+                    "is_staff",
+                    models.BooleanField(default=False, verbose_name="Is Staff"),
+                ),
+                (
+                    "is_active",
+                    models.BooleanField(default=True, verbose_name="Is Active"),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
     ]
