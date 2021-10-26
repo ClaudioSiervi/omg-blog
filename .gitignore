@@ -1,10 +1,12 @@
 
 core/.env
 
-.idea/*
+.idea/
 
 db.sqlite3
 
 relational_model_db.mwb.bak
 
 relational_model_db.mwb
+
+__pycache__/
