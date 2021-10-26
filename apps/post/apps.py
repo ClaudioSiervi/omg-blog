@@ -3,5 +3,5 @@ from django.apps import AppConfig
 
 class ArticleConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "apps.article"
-    verbose_name = "Article"
+    name = "apps.post"
+    verbose_name = "Post"
