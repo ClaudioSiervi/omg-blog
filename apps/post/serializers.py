@@ -1,3 +1,4 @@
+
 from rest_framework import serializers
 
 from apps.user.models import User
@@ -5,7 +6,9 @@ from apps.post.models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source="user.id")
+    owner = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        default=serializers.CurrentUserDefault())
 
     class Meta:
         model = Post
