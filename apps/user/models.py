@@ -19,7 +19,7 @@ class User(AbstractModelMixin, AbstractBaseUser):
     objects = UserManager()
 
     class Meta:
-        db_table = "user"
+        db_table = "user_user"
 
     def has_perm(self, perm, obj=None):
         return self.is_superuser
