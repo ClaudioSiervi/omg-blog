@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from apps.user.views import UserList, UserDetail, authentication_view
-from apps.post.views import PostList, PostDetail, post_view
+from apps.post.views import post_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -25,6 +25,6 @@ urlpatterns = [
     path('users/', UserList.as_view()),
     path('users/<int:pk>/', UserDetail.as_view()),
     path('posts/', post_view),
-    path('posts/<int:pk>/', PostDetail.as_view()),
+    path('posts/<str:pk>/', post_view),
 ]
 

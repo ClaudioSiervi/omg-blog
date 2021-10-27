@@ -1,18 +1,67 @@
 
+from dataclasses import field
 from rest_framework import serializers
 
 from apps.user.models import User
 from apps.post.models import Post
 
 
-class PostSerializer(serializers.ModelSerializer):
+class CreatePostSerializer(serializers.ModelSerializer):
     owner = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
         default=serializers.CurrentUserDefault())
 
     class Meta:
         model = Post
-        fields = ["id", "title", "body", "owner"]
+        fields = ["id", "title", "body", "owner", "created_at"]
+
+    def to_representation(self, instance):
+        serialized_data = super(CreatePostSerializer, self).to_representation(instance)
+        serialized_data["owner"] = instance.owner.name
+        return serialized_data
+
+
+class ListPostsSerializer(serializers.ModelSerializer):
+    owner = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = Post
+        fields = ["id", "title", "body", "owner", "created_at"]
+    
+    def to_representation(self, instance):
+        serialized_data = super(ListPostsSerializer, self).to_representation(instance)
+        serialized_data["owner"] = instance.owner.name
+        return serialized_data
+
+
+class PostPkSerializer(serializers.Serializer):
+    post_id = serializers.PrimaryKeyRelatedField(queryset=Post.objects.all())
+
+    
+class RetrievePostsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ["id", "title", "body", "created_at"]
+
+    def to_representation(self, instance):
+        serialized_data = super(RetrievePostsSerializer, self).to_representation(instance)
+        serialized_data["owner"] = self.context["request"].user.name
+        return serialized_data
+
+
+class UpdatePostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ["id", "title", "body", "created_at"]
+
+
+
+class DeletePostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ["id", "title", "body", "created_at"]
 
 
 class UserPostSerializer(serializers.ModelSerializer):
