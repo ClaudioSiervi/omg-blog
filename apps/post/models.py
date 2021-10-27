@@ -9,6 +9,11 @@ class Post(AbstractModelMixin, models.Model):
     body = models.TextField(blank=True, default="")
     owner = models.ForeignKey(User, related_name="posts", on_delete=models.CASCADE)
 
+
+    @property
+    def count_likes(self) -> int:
+        return self.likes.filter(post=self.pk).count()
+
     class Meta:
         db_table = "post"
         ordering = ["created_at"]
