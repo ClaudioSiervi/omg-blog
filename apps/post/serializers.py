@@ -1,5 +1,5 @@
 
-from dataclasses import field
+from typing import Dict
 from rest_framework import serializers
 
 from apps.user.models import User
@@ -15,7 +15,7 @@ class CreatePostSerializer(serializers.ModelSerializer):
         model = Post
         fields = ["id", "title", "body", "owner", "created_at"]
 
-    def to_representation(self, instance):
+    def to_representation(self, instance: Post) -> Dict:
         serialized_data = super(CreatePostSerializer, self).to_representation(instance)
         serialized_data["owner"] = instance.owner.name
         return serialized_data
@@ -30,7 +30,7 @@ class ListPostsSerializer(serializers.ModelSerializer):
         model = Post
         fields = ["id", "title", "body", "owner", "created_at"]
     
-    def to_representation(self, instance):
+    def to_representation(self, instance: Post) -> Dict:
         serialized_data = super(ListPostsSerializer, self).to_representation(instance)
         serialized_data["owner"] = instance.owner.name
         return serialized_data
@@ -41,11 +41,16 @@ class PostPkSerializer(serializers.Serializer):
 
     
 class RetrievePostsSerializer(serializers.ModelSerializer):
+    likes = serializers.SerializerMethodField()
+
     class Meta:
         model = Post
-        fields = ["id", "title", "body", "created_at"]
+        fields = ["id", "title", "body", "created_at", "likes"]
 
-    def to_representation(self, instance):
+    def get_likes(self, post: Post) -> int:
+        return post.count_likes
+
+    def to_representation(self, instance: Post) -> Dict:
         serialized_data = super(RetrievePostsSerializer, self).to_representation(instance)
         serialized_data["owner"] = self.context["request"].user.name
         return serialized_data

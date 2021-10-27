@@ -1,9 +1,8 @@
-from apps.post.models import Post
-from apps.user.models import User
-from django.db.models import fields
 from rest_framework import serializers
 
 from apps.like.models import Like
+from apps.post.models import Post
+from apps.user.models import User
 
 
 class CreateLikeSerializer(serializers.ModelSerializer):
@@ -12,8 +11,7 @@ class CreateLikeSerializer(serializers.ModelSerializer):
         queryset=User.objects.all(),
         default=serializers.CurrentUserDefault())
     post = serializers.PrimaryKeyRelatedField(queryset=Post.objects.all())
-    rating = serializers.IntegerField(min_value=1, max_value=5)
 
     class Meta:
         model = Like
-        fields = ["id", "post", "owner", "rating", "created_at"]
+        fields = ["id", "post", "owner", "created_at"]
