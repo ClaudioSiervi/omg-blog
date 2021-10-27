@@ -22,14 +22,18 @@ class CreatePostSerializer(serializers.ModelSerializer):
 
 
 class ListPostsSerializer(serializers.ModelSerializer):
+    likes = serializers.SerializerMethodField()
     owner = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
         default=serializers.CurrentUserDefault())
 
     class Meta:
         model = Post
-        fields = ["id", "title", "body", "owner", "created_at"]
-    
+        fields = ["id", "title", "body", "owner", "created_at", "likes"]
+
+    def get_likes(self, post: Post) -> int:
+        return post.count_likes
+
     def to_representation(self, instance: Post) -> Dict:
         serialized_data = super(ListPostsSerializer, self).to_representation(instance)
         serialized_data["owner"] = instance.owner.name
@@ -57,13 +61,6 @@ class RetrievePostsSerializer(serializers.ModelSerializer):
 
 
 class UpdatePostSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Post
-        fields = ["id", "title", "body", "created_at"]
-
-
-
-class DeletePostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ["id", "title", "body", "created_at"]

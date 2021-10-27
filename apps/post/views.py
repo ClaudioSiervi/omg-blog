@@ -1,19 +1,4 @@
-from core.facade.post import delete_post, update_post
-import datetime
-
 from uuid import UUID
-
-
-from apps.post.serializers import (
-    CreatePostSerializer,
-    DeletePostSerializer, 
-    ListPostsSerializer,
-    PostPkSerializer,
-    RetrievePostsSerializer,
-    UpdatePostSerializer,
-)
-from apps.post.models import Post
-
 
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -21,6 +6,17 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CONTENT
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.generics import get_object_or_404
+
+from apps.post.serializers import (
+    CreatePostSerializer,
+    ListPostsSerializer,
+    PostPkSerializer,
+    RetrievePostsSerializer,
+    UpdatePostSerializer,
+)
+from apps.post.models import Post
+
+from core.facade.post import delete_post, update_post
 
 
 @api_view(["POST", "GET", "PUT", "DELETE"])

@@ -36,7 +36,7 @@ def authentication_view(request: Request) -> Response:
 def user_view(request: Request) -> Response:
 
     if request.method == "POST":
-        # create post
+        # create user
         serializer = CreateUserSerializer(
             data=request.data,
             )
