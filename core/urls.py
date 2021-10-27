@@ -17,14 +17,13 @@ from apps.like.views import like_view
 from django.contrib import admin
 from django.urls import path
 
-from apps.user.views import UserList, UserDetail, authentication_view
+from apps.user.views import authentication_view, user_view
 from apps.post.views import post_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/sign-in/", authentication_view),
-    path('users/', UserList.as_view()),
-    path('users/<int:pk>/', UserDetail.as_view()),
+    path('users/', user_view),
     path('posts/', post_view),
     path('posts/<str:pk>/', post_view),
     path('likes/', like_view),

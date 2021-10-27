@@ -5,22 +5,18 @@ from rest_framework.permissions import AllowAny
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
+from rest_framework.request import Request
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_204_NO_CONTENT
+from rest_framework.decorators import api_view, permission_classes
+
 
 from core.facade.auth import authenticate
 
 
-from apps.user.serializers import UserSerializer, AuthSerializer
-from apps.user.models import User
+from apps.user.serializers import CreateUserSerializer, AuthSerializer
 
-
-class UserList(generics.ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
-class UserDetail(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
 
 
 @api_view(["POST"])
@@ -33,3 +29,17 @@ def authentication_view(request: Request) -> Response:
         {"access": token, "refresh": refresh},
         status=HTTP_200_OK,
     )
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def user_view(request: Request) -> Response:
+
+    if request.method == "POST":
+        # create post
+        serializer = CreateUserSerializer(
+            data=request.data,
+            )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, HTTP_201_CREATED)
