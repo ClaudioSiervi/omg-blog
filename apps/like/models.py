@@ -7,11 +7,6 @@ from apps.post.models import Post
 
 
 class Like(AbstractModelMixin, models.Model):
-    rating = models.PositiveSmallIntegerField(
-        verbose_name="Rating post",
-        validators=[MinValueValidator(1), MaxValueValidator(5)],
-        editable=False,
-    )
     post = models.ForeignKey(Post, related_name="likes", on_delete=models.CASCADE)
     owner = models.ForeignKey(User, related_name="likes", on_delete=models.CASCADE)
 
