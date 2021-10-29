@@ -15,3 +15,7 @@ class CreateLikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Like
         fields = ["id", "post", "owner", "created_at"]
+
+
+class LikePkSerializer(serializers.Serializer):
+    like_id = serializers.PrimaryKeyRelatedField(queryset=Like.objects.all())
