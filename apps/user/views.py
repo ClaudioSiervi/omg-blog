@@ -32,7 +32,6 @@ def authentication_view(request: Request) -> Response:
 
 
 @api_view(["POST"])
-@permission_classes([IsAuthenticated])
 def user_view(request: Request) -> Response:
 
     if request.method == "POST":
