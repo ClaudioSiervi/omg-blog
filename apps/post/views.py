@@ -32,7 +32,7 @@ def post_view(request: Request, pk: UUID = None) -> Response:
         serializer.save()
         return Response(serializer.data, HTTP_201_CREATED)
 
-    if request.method == "GET" and pk:
+    elif request.method == "GET" and pk:
         # retrieve post
         pk_serializer = PostPkSerializer(data={"post_id": pk})
         pk_serializer.is_valid(raise_exception=True)
@@ -45,14 +45,14 @@ def post_view(request: Request, pk: UUID = None) -> Response:
             )
         return Response(serializer.data, HTTP_200_OK)
 
-    if request.method == "GET" and not pk:
+    elif request.method == "GET" and not pk:
         # list posts
         serializer = ListPostsSerializer(
             Post.objects.all(), many=True
             )
         return Response(serializer.data, HTTP_200_OK)
     
-    if request.method == "PUT" and pk:
+    elif request.method == "PUT" and pk:
         # update post
         pk_serializer = PostPkSerializer(data={"post_id": pk})
         pk_serializer.is_valid(raise_exception=True)
@@ -61,7 +61,7 @@ def post_view(request: Request, pk: UUID = None) -> Response:
             )
         return Response(UpdatePostSerializer(post).data, HTTP_200_OK)
 
-    if request.method == "DELETE":
+    elif request.method == "DELETE":
         # delete post
         pk_serializer = PostPkSerializer(data={"post_id": pk})
         pk_serializer.is_valid(raise_exception=True)
