@@ -10,7 +10,7 @@ https://omg-blog.herokuapp.com/admin
 admin@admin.com 
 admin
 
-####Run project locally
+#### Run project locally
 
 * Install pipenv   
   
@@ -29,7 +29,7 @@ admin
 
 * Create super user
   `make superuser`
-  
+
 * Host server
  `http://localhost:8899/`
 
