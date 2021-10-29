@@ -22,10 +22,10 @@ from apps.post.views import post_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("auth/sign-in/", authentication_view),
-    path('users/', user_view),
-    path('posts/', post_view),
-    path('posts/<str:pk>/', post_view),
-    path('likes/', like_view),
+    path("api/v1/auth/sign-in/", authentication_view),
+    path('api/v1/users/', user_view),
+    path('api/v1/posts/', post_view),
+    path('api/v1/posts/<str:pk>/', post_view),
+    path('api/v1/likes/', like_view),
 ]
 
