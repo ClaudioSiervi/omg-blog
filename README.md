@@ -27,6 +27,9 @@ admin
 * Run:    
 `make run`    
 
+* Create super user
+  `make superuser`
+  
 * Host server
  `http://localhost:8899/`
 
