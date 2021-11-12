@@ -7,7 +7,7 @@ https://omg-blog.herokuapp.com/
 https://omg-blog.herokuapp.com/admin
 
 *credentials for back-office*  
-admin@admin.com 
+admin@admin.com   
 admin
 
 #### Run project locally
